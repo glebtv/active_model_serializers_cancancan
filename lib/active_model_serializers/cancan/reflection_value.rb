@@ -7,7 +7,7 @@ module ActiveModel
           unless authorize?
             return val
           end
-          if val.kind_of?(Array)
+          if val.kind_of?(ActiveRecord::Associations::CollectionProxy)
             val.select do |item|
               serializer.current_ability.can?(:read, item)
             end
